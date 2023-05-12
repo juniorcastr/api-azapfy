@@ -20,4 +20,5 @@ Route::get('/', function () {
 
 Route::get('/api/groupbyremete', [NotasController::class, 'groupByRemete']);
 Route::get('/api/totalremete', [NotasController::class, 'totalPorRemetente']);
+Route::get('/api/valorEntregue', [NotasController::class, 'valorEntregue']);
 
