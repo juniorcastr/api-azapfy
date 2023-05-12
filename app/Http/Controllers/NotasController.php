@@ -55,4 +55,17 @@ class NotasController extends Controller
         dd($valorPorRemetenteEntregue);
 
     }
+
+    public function valorReceber()
+    {
+        $notas = $this->getData();
+
+        $notasPorRemetenteAberto = collect($notas)->where('status','ABERTO')->groupBy('nome_remete');
+
+        $valorPorRemetenteAberto = $notasPorRemetenteAberto->map(function ($notas) {
+            return $notas->sum('valor');
+        });
+
+        dd($valorPorRemetenteAberto);
+    }
 }

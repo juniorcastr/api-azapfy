@@ -19,6 +19,7 @@ Route::get('/', function () {
 });
 
 Route::get('/api/groupbyremete', [NotasController::class, 'groupByRemete']);
-Route::get('/api/totalremete', [NotasController::class, 'totalPorRemetente']);
-Route::get('/api/valorEntregue', [NotasController::class, 'valorEntregue']);
+Route::get('/api/total-remete', [NotasController::class, 'totalPorRemetente']);
+Route::get('/api/valor-entregue', [NotasController::class, 'valorEntregue']);
+Route::get('/api/valor-receber', [NotasController::class, 'valorReceber']);
 
