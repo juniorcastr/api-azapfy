@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 
@@ -25,11 +26,10 @@ class NotasController extends Controller
         $notas = $this->getData();
         $groupBy = collect($notas)->groupBy('nome_remete');
 
-        dd($groupBy);
-
+        return response()->json($groupBy, Response::HTTP_OK);
     }
 
-    public function totalPorRemetente()
+    public function totalRemetente()
     {
         $notas = $this->getData();
 
@@ -39,8 +39,7 @@ class NotasController extends Controller
             return $notas->sum('valor');
         });
 
-        dd($valorPorRemetente);
-
+        return response()->json($valorPorRemetente, Response::HTTP_OK);
     }
 
     public function valorEntregue()
@@ -60,8 +59,7 @@ class NotasController extends Controller
             return $notas->sum('valor');
         });
 
-        dd($valorPorRemetenteEntregue);
-
+        return response()->json($valorPorRemetenteEntregue, Response::HTTP_OK);
     }
 
     public function emAberto()
@@ -74,14 +72,14 @@ class NotasController extends Controller
             return $notas->sum('valor');
         });
 
-        dd($valorPorRemetenteAberto);
+        return response()->json($valorPorRemetenteAberto, Response::HTTP_OK);
     }
 
     public function deixouReceber()
     {
         $notas = $this->getData();
 
-        $notasPorRemetenteEntregue = collect($notas)->where('status','COMPROVADO')
+        $notasPorRemetenteEntregueFora = collect($notas)->where('status','COMPROVADO')
             ->filter(function ($nota) {
                 $dataEmissao = Carbon::createFromFormat('d/m/Y H:i:s', $nota['dt_emis']);
                 $dataEntrega = Carbon::createFromFormat('d/m/Y H:i:s', $nota['dt_entrega']);
@@ -90,10 +88,10 @@ class NotasController extends Controller
             })
             ->groupBy('nome_remete');
 
-        $valorPorRemetenteEntregue = $notasPorRemetenteEntregue->map(function ($notas) {
+        $valorPorRemetenteEntregueFora = $notasPorRemetenteEntregueFora->map(function ($notas) {
             return $notas->sum('valor');
         });
 
-        dd($valorPorRemetenteEntregue);
+        return response()->json($valorPorRemetenteEntregueFora, Response::HTTP_OK);
     }
 }

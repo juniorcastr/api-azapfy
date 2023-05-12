@@ -18,9 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/api/groupbyremete', [NotasController::class, 'groupByRemete']);
-Route::get('/api/total-remete', [NotasController::class, 'totalPorRemetente']);
-Route::get('/api/valor-entregue', [NotasController::class, 'valorEntregue']);
-Route::get('/api/em-aberto', [NotasController::class, 'emAberto']);
-Route::get('/api/deixou-receber', [NotasController::class, 'deixouReceber']);
+Route::group(['prefix' => 'notas'], function() {
+    Route::get('/byremetente', [NotasController::class, 'groupByRemete']);
+    Route::get('/total', [NotasController::class, 'totalRemetente']);
+    Route::get('/entregue', [NotasController::class, 'valorEntregue']);
+    Route::get('/emaberto', [NotasController::class, 'emAberto']);
+    Route::get('/deixoureceber', [NotasController::class, 'deixouReceber']);
+});
 
