@@ -27,4 +27,18 @@ class NotasController extends Controller
         dd($groupBy);
 
     }
+
+    public function totalPorRemetente()
+    {
+        $notas = $this->getData();
+
+        $notasPorRemetente = collect($notas)->groupBy('nome_remete');
+
+        $valorPorRemetente = $notasPorRemetente->map(function ($notas) {
+            return $notas->sum('valor');
+        });
+
+        dd($valorPorRemetente);
+
+    }
 }
