@@ -64,7 +64,7 @@ class NotasController extends Controller
 
     }
 
-    public function valorReceber()
+    public function emAberto()
     {
         $notas = $this->getData();
 
@@ -77,5 +77,23 @@ class NotasController extends Controller
         dd($valorPorRemetenteAberto);
     }
 
+    public function deixouReceber()
+    {
+        $notas = $this->getData();
 
+        $notasPorRemetenteEntregue = collect($notas)->where('status','COMPROVADO')
+            ->filter(function ($nota) {
+                $dataEmissao = Carbon::createFromFormat('d/m/Y H:i:s', $nota['dt_emis']);
+                $dataEntrega = Carbon::createFromFormat('d/m/Y H:i:s', $nota['dt_entrega']);
+                $diffEmDias = $dataEntrega->diffInDays($dataEmissao);
+                return $diffEmDias >= 3;
+            })
+            ->groupBy('nome_remete');
+
+        $valorPorRemetenteEntregue = $notasPorRemetenteEntregue->map(function ($notas) {
+            return $notas->sum('valor');
+        });
+
+        dd($valorPorRemetenteEntregue);
+    }
 }
