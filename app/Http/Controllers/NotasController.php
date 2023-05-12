@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 
@@ -46,7 +47,14 @@ class NotasController extends Controller
     {
         $notas = $this->getData();
 
-        $notasPorRemetenteEntregue = collect($notas)->where('status','COMPROVADO')->groupBy('nome_remete');
+        $notasPorRemetenteEntregue = collect($notas)->where('status','COMPROVADO')
+            ->filter(function ($nota) {
+                $dataEmissao = Carbon::createFromFormat('d/m/Y H:i:s', $nota['dt_emis']);
+                $dataEntrega = Carbon::createFromFormat('d/m/Y H:i:s', $nota['dt_entrega']);
+                $diffEmDias = $dataEntrega->diffInDays($dataEmissao);
+                return $diffEmDias <= 2;
+            })
+            ->groupBy('nome_remete');
 
         $valorPorRemetenteEntregue = $notasPorRemetenteEntregue->map(function ($notas) {
             return $notas->sum('valor');
@@ -68,4 +76,6 @@ class NotasController extends Controller
 
         dd($valorPorRemetenteAberto);
     }
+
+
 }
