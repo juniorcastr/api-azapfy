@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NotasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix' => 'notas'], function() {
+    Route::get('/byremetente', [NotasController::class, 'groupByRemete']);
+    Route::get('/total', [NotasController::class, 'totalRemetente']);
+    Route::get('/entregue', [NotasController::class, 'valorEntregue']);
+    Route::get('/emaberto', [NotasController::class, 'emAberto']);
+    Route::get('/deixoureceber', [NotasController::class, 'deixouReceber']);
+});
+
