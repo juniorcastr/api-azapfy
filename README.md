@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ## INTRODUÇÃO
 ESTE É O REPOSITÓRIO DO TESTE PARA A VAGA DE DEV PHP BACKEND JR DA AZAPFY
 
@@ -23,3 +24,6 @@ PREFIXO => NOTAS
 ##LARAVEL
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+=======
+# api-azapfy
+>>>>>>> 52a5cb63aab2367265d3ddd2f72e9ac8130e3547
