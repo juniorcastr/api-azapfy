@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 ## INTRODUÇÃO
 ESTE É O REPOSITÓRIO DO TESTE PARA A VAGA DE DEV PHP BACKEND JR DA AZAPFY
 
@@ -15,15 +15,9 @@ ESTE É O REPOSITÓRIO DO TESTE PARA A VAGA DE DEV PHP BACKEND JR DA AZAPFY
 ## ROTAS
 PREFIXO => NOTAS
 
-/byremetente - Agrupar as notas por remetente.
-/total - Calcular o valor total das notas para cada remetente.
-/entregue - Calcular o valor que o remetente irá receber pelo que já foi entregue.
-/emaberto - Calcular o valor que o remetente irá receber pelo que ainda não foi entregue.
-/deixoureceber - Calcular quanto o remetente deixou de receber devido ao atraso na entrega.
+- /byremetente - Agrupar as notas por remetente.
+- /total - Calcular o valor total das notas para cada remetente.
+- /entregue - Calcular o valor que o remetente irá receber pelo que já foi entregue.
+- /emaberto - Calcular o valor que o remetente irá receber pelo que ainda não foi entregue.
+- /deixoureceber - Calcular quanto o remetente deixou de receber devido ao atraso na entrega.
 
-##LARAVEL
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-=======
-# api-azapfy
->>>>>>> 52a5cb63aab2367265d3ddd2f72e9ac8130e3547
